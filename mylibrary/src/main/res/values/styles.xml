@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+        <style name="SwitchAcne" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/switchAcne</item>
+        <item name="colorSwitchThumbNormal">@color/switchAcne</item>
+
+        <item name="android:colorForeground">@color/switchAcne</item>
+        </style>
+    <style name="SwitchSpot" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/switchSpot</item>
+        <item name="colorSwitchThumbNormal">@color/switchSpot</item>
+
+        <item name="android:colorForeground">@color/switchSpot</item>
+    </style>
+    <style name="SwitchPimple" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/switchPimple</item>
+        <item name="colorSwitchThumbNormal">@color/switchPimple</item>
+
+        <item name="android:colorForeground">@color/switchPimple</item>
+    </style>
+    <style name="SwitchBlacKhead" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/switchBlacKhead</item>
+        <item name="colorSwitchThumbNormal">@color/switchBlacKhead</item>
+
+        <item name="android:colorForeground">@color/switchBlacKhead</item>
+    </style>
+    <style name="SwitchFace" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/switchFace</item>
+        <item name="colorSwitchThumbNormal">@color/switchFace</item>
+
+        <item name="android:colorForeground">@color/switchFace</item>
+    </style>
+
+</resources>

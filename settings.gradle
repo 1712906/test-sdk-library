@@ -1,0 +1,4 @@
+rootProject.name='SDKSkin'
+include ':app'
+include ':mylibrary'
+include ':mytest'

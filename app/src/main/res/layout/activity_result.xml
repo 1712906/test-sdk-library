@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ResultActivity">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+        <ImageView
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="50px"
+            android:id="@+id/img_result"
+            android:layout_width="match_parent"
+            android:layout_height="1200px"></ImageView>
+        <LinearLayout
+            android:layout_marginTop="40px"
+            android:orientation="vertical"
+            android:id="@+id/constaint_layout"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:weightSum="3"
+            android:background="@drawable/bg_card"
+            app:layout_constraintTop_toBottomOf="@id/img_result"
+            android:layout_height="300px">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:gravity="center"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="@color/switchBlacKhead"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:text="Blackheads"/>
+                    <Switch
+                        android:layout_marginLeft="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/SwitchBlacKhead"
+                        android:checked="true"
+                        android:id="@+id/SwitchBackHeads" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="@color/switchSpot"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:text="Spot"/>
+
+                    <Switch
+                        android:id="@+id/swithSpot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50px"
+                        android:checked="true"
+                        android:theme="@style/SwitchSpot" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:gravity="center"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="@color/switchAcne"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:text="Ance"/>
+                    <Switch
+                        android:layout_marginLeft="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/SwitchAcne"
+                        android:checked="true"
+                        android:id="@+id/SwitchAcne" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="@color/switchPimple"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:text="Pimple"/>
+                    <Switch
+                        android:layout_marginLeft="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/SwitchPimple"
+                        android:checked="true"
+                        android:id="@+id/swithPimple" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:gravity="left"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="@color/switchMole"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:text="Mole"/>
+                    <Switch
+                        android:layout_marginLeft="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/SwitchMole"
+                        android:checked="true"
+                        android:id="@+id/SwitchMole" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_width="match_parent"
+            android:layout_margin="10px"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="500px"
+                android:layout_height="100px"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:textSize="40px"
+                android:translationZ="90dp"
+                android:text="General Results"
+                android:background="@drawable/bg_gradient"
+                ></TextView>
+
+            <LinearLayout
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:layout_marginTop="100px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="100px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_General">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
