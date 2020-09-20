@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:parentActivityName="com.production.mylibrary.MainActivity"
+            android:parentActivityName="com.production.mylibrary.FirstMainActivity"
             android:name=".ResultActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.production.mylibrary.MainActivity" />
+                android:value="com.production.mylibrary.FirstMainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".FirstMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

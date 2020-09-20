@@ -40,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class FirstMainActivity extends AppCompatActivity {
     ImageView imageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_GALARY=2;
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_main);
+        this.setContentView(R.layout.first_activity_main);
         getSupportActionBar().hide();
         checkPermission();
         imageView= findViewById(R.id.img_face);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         btn_result=findViewById(R.id.btn_result);
 
         photoFile = getPhotoFileUri(photoFileName);
-        fileProvider = FileProvider.getUriForFile(MainActivity.this, "com.production.sdkskin", photoFile);
+        fileProvider = FileProvider.getUriForFile(FirstMainActivity.this, "com.production.sdkskin", photoFile);
 
         pDialog= new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));

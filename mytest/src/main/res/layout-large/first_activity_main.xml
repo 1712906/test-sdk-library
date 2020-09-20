@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".FirstMainActivity">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,6 +29,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_camera"
         android:layout_width="100px"
+        app:borderWidth="0dp"
         android:layout_height="100px"
         android:layout_marginStart="72px"
         android:layout_marginTop="40px"

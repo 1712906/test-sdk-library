@@ -146,7 +146,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void FetchDetailImage(String id) {
         pDialog.show();
-        RetrofitInstance service = ApiUtils.getInstance(MainActivity.domain);
+        RetrofitInstance service = ApiUtils.getInstance(FirstMainActivity.domain);
         service.getDetail(id).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
