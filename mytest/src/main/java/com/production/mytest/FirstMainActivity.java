@@ -1,7 +1,7 @@
-package com.production.mylibrary;
+package com.production.mytest;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,10 +12,14 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,10 +32,12 @@ import androidx.core.content.FileProvider;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonObject;
-import com.production.mylibrary.Model.PostImage;
+import com.production.mytest.Model.PostImage;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class FirstMainActivity extends AppCompatActivity {
     ImageView imageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_GALARY=2;
@@ -53,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
     File photoFile;
     Uri fileProvider;
 
-
-
     FloatingActionButton btn_camera, btn_pick;
     Button btn_result;
     String[] permissions= new String[]{
@@ -63,14 +67,15 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.CAMERA,
             Manifest.permission.INTERNET};
     static final String domain ="https://shrouded-brushlands-68077.herokuapp.com/";
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_main);
+        setContentView(R.layout.first_activity_main);
         getSupportActionBar().hide();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
         checkPermission();
         imageView= findViewById(R.id.img_face);
         btn_camera= findViewById(R.id.btn_camera);
@@ -78,21 +83,21 @@ public class MainActivity extends AppCompatActivity {
         btn_result=findViewById(R.id.btn_result);
 
         photoFile = getPhotoFileUri(photoFileName);
-        fileProvider = FileProvider.getUriForFile(MainActivity.this, "com.production.sdkskin", photoFile);
+        fileProvider = FileProvider.getUriForFile(FirstMainActivity.this, "com.production.sdkskin", photoFile);
 
         pDialog= new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Loading");
         pDialog.setCancelable(false);
 
-        /*btn_result.setOnClickListener(new View.OnClickListener() {
+        btn_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
-                bitmap= Bitmap.createScaledBitmap(bitmap, 500, 500, false);
+                bitmap= Bitmap.createScaledBitmap(bitmap, 640, 640, false);
                 ByteArrayOutputStream stream=new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] image=stream.toByteArray();
 
                 String img_str = Base64.encodeToString(image,Base64.NO_WRAP);
@@ -113,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dispatchPickPictureIntent();
             }
-        });*/
+        });
     }
 
     private void postImage(String email, String img_str) {
@@ -187,17 +192,24 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(pickPictureIntent,REQUEST_IMAGE_GALARY);
     }
     // Result from intent
-    @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
         if (resultCode == RESULT_OK) {
-            switch (requestCode) {
+            switch (requestCode)
+            {
                 case 1:
-                    /*Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    imageView.setImageBitmap(imageBitmap);*/
-                    this.imageView.setImageURI(fileProvider);
+                    pDialog.show();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), fileProvider);
+                        Bitmap rotatedBitmap = rotateImageIfRequired(getApplicationContext(),bitmap,fileProvider);
+                        this.imageView.setImageDrawable(new BitmapDrawable(getResources(),rotatedBitmap));
+
+                    } catch (IOException e) {
+                        Log.d("Image:",e.toString());
+                        e.printStackTrace();
+                    }
+                    pDialog.hide();
                     break;
                 case 2:
                     pDialog.show();
@@ -240,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                                 loadedBitmap = rotateBitmap(loadedBitmap, 270);
                                 break;
                         }
-                        imageView.setImageDrawable(new BitmapDrawable(getResources(), loadedBitmap));
+                        imageView.setImageDrawable(new BitmapDrawable(getResources(),loadedBitmap));
                         pDialog.hide();
                     }
                     break;
@@ -266,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                         JsonObject object = response.body();
                         object = object.getAsJsonObject("data");
                         String id = String.valueOf(object.get("_id"));
-                        Intent intent = new Intent(getApplication(),ResultActivity.class);
+                        Intent intent = new Intent(getApplication(), ResultActivity.class);
                         intent.putExtra("idImage",id);
                         startActivity(intent);
 
@@ -316,5 +328,27 @@ public class MainActivity extends AppCompatActivity {
         File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
 
         return file;
+    }
+    private static Bitmap rotateImageIfRequired(Context context, Bitmap img, Uri selectedImage) throws IOException {
+
+        InputStream input = context.getContentResolver().openInputStream(selectedImage);
+        ExifInterface ei;
+        if (Build.VERSION.SDK_INT > 23)
+            ei = new ExifInterface(input);
+        else
+            ei = new ExifInterface(selectedImage.getPath());
+
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return rotateBitmap(img, 90);
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return rotateBitmap(img, 180);
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return rotateBitmap(img, 270);
+            default:
+                return img;
+        }
     }
 }

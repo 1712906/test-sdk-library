@@ -28,7 +28,7 @@
         </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.production.sdkskin"
+            android:authorities="com.production.mytest"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
